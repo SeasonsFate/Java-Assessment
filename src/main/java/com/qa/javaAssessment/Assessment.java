@@ -48,7 +48,6 @@ public class Assessment {
 		}
 
 		word = input.substring(bert1, bert2);
-		
 
 		String word1 = "";
 		for (int i = word.length(); i > 0; i--) {
@@ -128,13 +127,12 @@ public class Assessment {
 
 	public String nMid(String input, int a) {
 		String word = "";
-		for (int i = 0; i < input.length(); i++) {
-			if (i + a == input.length()) { // i = 2 a = 3
-				word += input.substring(0, (i / 2));
-				word += input.substring((i / 2) + (a / 2) + 2, i / 2 + a + 1);
 
-			}
-		}
+		int mid = (input.length() / 2); // for "hello" = 2
+		int rem = a / 2; // for a = 3 a/2 = 1
+		word += input.substring(0, mid - rem);
+		word += input.substring(mid + rem + 1);
+
 		return word;
 	}
 
@@ -149,19 +147,19 @@ public class Assessment {
 		if (input.equals("")) {
 			return 0;
 		}
-		String prevChar = input.substring(0,1);
+		String prevChar = input.substring(0, 1);
 		ArrayList<Integer> arrayCount = new ArrayList<Integer>();
 		int count = 1;
 		for (int i = 1; i < input.length(); i++) {
-			String thisChar = input.substring(i,i+1);
+			String thisChar = input.substring(i, i + 1);
 			if (thisChar.equals(prevChar)) {
-				count++;				
+				count++;
 			} else {
 				arrayCount.add(count);
 				count = 1;
 				prevChar = thisChar;
 			}
-			
+
 		}
 
 		return Collections.max(arrayCount);
@@ -215,8 +213,10 @@ public class Assessment {
 			return "fizzbuzz";
 		} else if (arg1 % 3 == 0 && arg1 % 5 != 0) {
 			return "fizz";
-		} else {
+		} else if(arg1 % 5 == 0 && arg1 % 3 != 0){
 			return "buzz";
+		} else {
+			return "none";
 		}
 
 	}
@@ -237,33 +237,33 @@ public class Assessment {
 
 	public int largest(String arg1) {
 		ArrayList<Integer> numList = new ArrayList<Integer>();
-		while(arg1.length()>0) {
-			if(arg1.contains(" ")) {
-				int num = Integer.parseInt(arg1.substring(0,arg1.indexOf(" ")));
+		while (arg1.length() > 0) {
+			if (arg1.contains(" ")) {
+				int num = Integer.parseInt(arg1.substring(0, arg1.indexOf(" ")));
 				numList.add(num);
 				arg1 = arg1.substring(arg1.indexOf(" ") + 1);
-				System.out.println("arg1: " +arg1);
-			}else {
+				System.out.println("arg1: " + arg1);
+			} else {
 				int num = Integer.parseInt(arg1.substring(0));
 				numList.add(num);
 				break;
 			}
 
 		}
-		
+
 		ArrayList<Integer> arraySum = new ArrayList<Integer>();
-		
-		for(int x : numList) {
+
+		for (int x : numList) {
 			int sum = 0;
-			while(x>0) {
-				sum = sum + x%10;
-				x = x/10;
+			while (x > 0) {
+				sum = sum + x % 10;
+				x = x / 10;
 			}
 			arraySum.add(sum);
 			System.out.println("sum: " + sum);
-			
+
 		}
-		
-		 return Collections.max(arraySum);
+
+		return Collections.max(arraySum);
 	}
 }
